@@ -16,24 +16,28 @@ import com.example.springmall.sample.vo.Sample;
 public class SampleController {
 	@Autowired
 	private SampleService sampleService;
-	
-	// 1. 샘플목록
 	@RequestMapping(value="/sample/sampleList",method=RequestMethod.GET)
-	public String sampleList(Model model) { // Model model = new Model();
-		List<Sample> sampleList = sampleService.getSampleAll();
+	// Spring 에서는 매개변수 model 의 객체를 Spring 에서 생성해준다.
+	public String sampleList(Model model,@RequestParam(value="startRow",required=false,defaultValue="0") int startRow) {
+	
+		System.out.println("sampleList()");
+		List<Sample> sampleList = sampleService.getSampleAll(startRow);
+		int totalCount = sampleService.getTotalCount();
+		model.addAttribute("startRow",startRow);
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("sampleList", sampleList);
+		System.out.println(sampleList);
 		return "/sample/sampleList";
-	}
-	// 2. 삭제
-	@RequestMapping(value="/sample/removeSample", method=RequestMethod.GET)
-	public String removeSample(@RequestParam(value="sampleNo") int sampleNo) {
-		if(sampleService.removeSample(sampleNo)==1) {
-			System.out.println(sampleNo+"번 데이터 삭제 성공");
-		}
-		return "redirect:/sample/sampleList";
 		
 	}
 	
+	//2 삭제 
+	@RequestMapping(value="/sample/removeSample",method=RequestMethod.GET)
+	public String removeSample(@RequestParam(value="sampleNo") int sampleNo) {
+		sampleService.removeSample(sampleNo); 
+		return "redirect:/sample/sampleList";
+	}
+}
 	// 3-1. 입력 
 	// 3-2. 입력액션
-}
+

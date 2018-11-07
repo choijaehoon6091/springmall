@@ -32,7 +32,14 @@
 					<td><a href="/sample/modifySample?sampleNo=${sample.sampleNo}">UPDATE</a></td>
 				</tr>
 			</c:forEach>					
-		</tbody>		
+		</tbody>
+				<tr>		
+					<td><c:if test="${startRow >9}">
+						<a href="/sample/sampleList?startRow=${startRow -10}"><button>＜＜이전 </button></a>
+					</c:if></td> <td></td><td></td><td></td>
+					<td><c:if test="${startRow < totalCount-10}">
+						<a href="/sample/sampleList?startRow=${startRow +10}"><button type="button" style="float: right;">다음＞＞</button></a>
+					</c:if></td>				
 	</table>
 </body>
 </html>

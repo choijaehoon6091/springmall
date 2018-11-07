@@ -1,6 +1,5 @@
 package com.example.springmall.sample.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +13,26 @@ import com.example.springmall.sample.vo.Sample;
 @Transactional
 public class SampleService {
 	@Autowired
-	//1
 	private SampleMapper sampleMapper;
-	
-	public List<Sample> getSampleAll(){
-		// 페이징 관련 코드
-		List<Sample> list = new ArrayList<Sample>();
-		
-		
-		return list;
-		// return sampleMapper.selectSampleAll();
+	int startRow = 0;
+	int rowPerPage = 10;
+	int totalCount;
+	// 1
+	public int getTotalCount() {
+		return totalCount = sampleMapper.selectCountSample();
 	}
-	//2
+
+	public List<Sample> getSampleAll(int startRow){
+	
+	return sampleMapper.selectSampleAll(startRow,rowPerPage);
+	}
 	public int removeSample(int sampleNo) {
-		// return sampleMapper.deleteSample(sampleNo);
-		return 1;
+		int success = sampleMapper.deleteSample(sampleNo);
+		if(success == 1) {
+			System.out.println("삭제성공");
+		}else {
+			System.out.println("삭제실패");
+		}
+		return success;
 	}
 }
