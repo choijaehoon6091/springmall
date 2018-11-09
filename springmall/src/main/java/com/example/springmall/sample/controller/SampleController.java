@@ -16,8 +16,9 @@ import com.example.springmall.sample.vo.Sample;
 public class SampleController {
 	@Autowired
 	private SampleService sampleService;
+	
+	// 1. 리스트
 	@RequestMapping(value="/sample/sampleList",method=RequestMethod.GET)
-	// Spring 에서는 매개변수 model 의 객체를 Spring 에서 생성해준다.
 	public String sampleList(Model model,@RequestParam(value="startRow",required=false,defaultValue="0") int startRow) {
 	
 		System.out.println("sampleList()");
@@ -31,13 +32,41 @@ public class SampleController {
 		
 	}
 	
-	//2 삭제 
+	// 2. 삭제 
 	@RequestMapping(value="/sample/removeSample",method=RequestMethod.GET)
 	public String removeSample(@RequestParam(value="sampleNo") int sampleNo) {
 		sampleService.removeSample(sampleNo); 
 		return "redirect:/sample/sampleList";
 	}
+	
+	// 3-1. 입력  폼
+	@RequestMapping(value="/sample/addSample",method=RequestMethod.GET)
+	public String addSample() {
+		return "/sample/addSample";	
+		// jquery, bootstrap, commmand객체
+	}
+	
+	// 3-2. 입력 액션
+	@RequestMapping(value="/sample/addSample",method=RequestMethod.POST)
+	public String addSample(Sample sample) {
+		// - Sample 친구들
+		// command객체의 멤버변수 == input태그 name속성, setter
+		int row = sampleService.addSample(sample);
+		return "redirect:/sample/sampleList";
+	}
+	
+	// 4-1. 수정 폼
+	@RequestMapping(value="/sample/modifySample", method=RequestMethod.GET)
+	public String modifySample(Model model, @RequestParam(value="sampleNo",defaultValue="1")int sampleNo) {
+		Sample sample = sampleService.getSample(sampleNo);
+		model.addAttribute("sample", sample);
+		return "/sample/modifySample";
+		
+	}
+	// 4-2. 수정 액션
+	@RequestMapping(value="/sample/modifySample", method=RequestMethod.POST)
+	public String modifySample(Sample sample) {
+		sampleService.modifySample(sample);
+		return "redirect:/sample/sampleList";
+	}
 }
-	// 3-1. 입력 
-	// 3-2. 입력액션
-

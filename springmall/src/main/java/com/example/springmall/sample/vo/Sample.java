@@ -20,23 +20,25 @@ public class Sample {
 		return sampleNo;
 	}
 	public void setSampleNo(int sampleNo) {
+		System.out.println(sampleNo + "<--setSamoleNo  SampleNo.java");
 		this.sampleNo = sampleNo;
 	}
 	public String getSampleId() {
 		return sampleId;
 	}
 	public void setSampleId(String sampleId) {
+		System.out.println(sampleId + "<--setSamoleId  SampleNo.java");
 		this.sampleId = sampleId;
 	}
 	public String getSamplePw() {
 		return samplePw;
 	}
 	public void setSamplePw(String samplePw) {
+		System.out.println(samplePw + "<--setSamolePw  SampleNo.java");
 		this.samplePw = samplePw;
 	}
 	@Override
 	public String toString() {
 		return "Sample [sampleNo=" + sampleNo + ", sampleId=" + sampleId + ", samplePw=" + samplePw + "]";
 	}
-	
 }
