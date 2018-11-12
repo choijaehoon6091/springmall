@@ -30,18 +30,22 @@
 </head>
 <body>
     <h2>샘플 추가</h2>
-    <form id="addSampleForm" action="${pageContext.request.contextPath}/sample/addSample" method="post">
+    <form id="addSampleForm" action="${pageContext.request.contextPath}/sample/addSample" method="post" enctype="multipart/form-data">
         <table class="table table-dark">
             <tr>
                 <td>ID</td>
-                <td><input type="text" name="sampleId"/> <span id="sampleIdHelper"></td>
+                <td><input type="text" name="sampleId"/> <span id="sampleIdHelper"></span></td>
             </tr>
             <tr>
                 <td>PW</td>
-                <td><input type="text" name="samplePw"/> <span id="samplePwHelper"></td>
+                <td><input type="text" name="samplePw"/> <span id="samplePwHelper"></span></td>
             </tr>
             <tr>
-                <td callspan="2"><button id="addBtn" class="btn btn-success">추가 완료</button></td>
+                <td>FILE</td>
+                <td><input type="file" name="multipartfile"/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button id="addBtn" class="btn btn-success">추가 완료</button></td>
             </tr>
         </table>
     </form>

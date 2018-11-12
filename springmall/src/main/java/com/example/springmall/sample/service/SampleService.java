@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.springmall.sample.mapper.SampleMapper;
 import com.example.springmall.sample.vo.Sample;
+import com.example.springmall.sample.vo.SampleRequest;
 
 @Service
 @Transactional
@@ -16,7 +17,7 @@ public class SampleService {
 	private SampleMapper sampleMapper;
 	
 	public int loginSample(Sample sample) {
-		int success = 0;
+		int loginSuccess = 0;
 		Sample getSample = new Sample();
 		getSample = (Sample) sampleMapper.loginSample(sample);
 		System.out.println(sample.getSampleId()+"<-넣은값");
@@ -25,12 +26,12 @@ public class SampleService {
 		System.out.println(getSample.getSamplePw()+"<-결과");
 		if(sample.getSampleId().equals(getSample.getSampleId()) && sample.getSamplePw().equals(getSample.getSamplePw())) {
 			System.out.println("01로그인성공");
-			success = 1;
+			loginSuccess = 1;
 		}else {
 			System.out.println("02로그인실패");
-			success = 2;
+			loginSuccess = 2;
 		}
-		return success;
+		return loginSuccess;
 	}
 	
 	// 수정폼 
@@ -41,24 +42,29 @@ public class SampleService {
 	// 수정액션
 	public int modifySample(Sample sample) {
 		System.out.println("SampleService.java.modifySample()");
-		int success = sampleMapper.updateSample(sample);;
-		if(success == 1) {
+		int modifySuccess = sampleMapper.updateSample(sample);;
+		if(modifySuccess == 1) {
 			System.out.println("삭제성공");
 		}else {
 			System.out.println("삭제실패");
 		}
-		return success;
+		return modifySuccess;
 	}
 	// insert
-	public int addSample(Sample sample) {
+	public int addSample(SampleRequest sampleRequest) {
 		System.out.println("SampleService.java.addSample()");
-		int success = sampleMapper.insertSample(sample);
-		if(success == 1) {
+		/*
+		 * SampleRequest --> Sample
+		 * 1. multipartfile 파일데이터 -> 저장
+		 * 2. multipartfile 정보 -> 새로운정보 추가 -> SampleFile
+		 */
+		int addSuccess = sampleMapper.insertSample(sampleRequest);
+		if(addSuccess == 1) {
 			System.out.println("가입성공");
 		}else {
 			System.out.println("가입실패");
 		}
-		return success;
+		return addSuccess;
 	}
 	
 	int startRow = 0;
@@ -76,12 +82,12 @@ public class SampleService {
 	}
 	public int removeSample(int sampleNo) {
 		System.out.println("SampleService.java.removeSample()");
-		int success = sampleMapper.deleteSample(sampleNo);
-		if(success == 1) {
+		int removeSuccess = sampleMapper.deleteSample(sampleNo);
+		if(removeSuccess == 1) {
 			System.out.println("삭제성공");
 		}else {
 			System.out.println("삭제실패");
 		}
-		return success;
+		return removeSuccess;
 	}
 }

@@ -4,7 +4,7 @@ public class Sample {
 	private int sampleNo;
 	private String sampleId;
 	private String samplePw;
-	
+	private SampleFile sampleFile;
 	
 	public Sample() {
 		super();
@@ -20,21 +20,21 @@ public class Sample {
 		return sampleNo;
 	}
 	public void setSampleNo(int sampleNo) {
-		System.out.println(sampleNo + "<--setSamoleNo  SampleNo.java");
+		System.out.println(sampleNo + "<--setSampleNo  SampleNo.java");
 		this.sampleNo = sampleNo;
 	}
 	public String getSampleId() {
 		return sampleId;
 	}
 	public void setSampleId(String sampleId) {
-		System.out.println(sampleId + "<--setSamoleId  SampleNo.java");
+		System.out.println(sampleId + "<--setSampleId  SampleNo.java");
 		this.sampleId = sampleId;
 	}
 	public String getSamplePw() {
 		return samplePw;
 	}
 	public void setSamplePw(String samplePw) {
-		System.out.println(samplePw + "<--setSamolePw  SampleNo.java");
+		System.out.println(samplePw + "<--setSamplePw  SampleNo.java");
 		this.samplePw = samplePw;
 	}
 	@Override

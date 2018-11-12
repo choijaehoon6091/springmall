@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.springmall.sample.service.SampleService;
 import com.example.springmall.sample.vo.Sample;
+import com.example.springmall.sample.vo.SampleRequest;
 
 @Controller
 public class SampleController {
@@ -48,10 +49,11 @@ public class SampleController {
 	
 	// 3-2. 입력 액션
 	@RequestMapping(value="/sample/addSample",method=RequestMethod.POST)
-	public String addSample(Sample sample) {
+	public String addSample(SampleRequest sampleRequest) {
 		// - Sample 친구들
 		// command객체의 멤버변수 == input태그 name속성, setter
-		int row = sampleService.addSample(sample);
+		System.out.println("SampleRequest.multipartFile:"+sampleRequest.getMultipartFile());
+		int row = sampleService.addSample(sampleRequest);
 		return "redirect:/sample/sampleList";
 	}
 	

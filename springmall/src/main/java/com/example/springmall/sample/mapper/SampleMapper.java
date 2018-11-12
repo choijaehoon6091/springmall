@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.springmall.sample.vo.Sample;
+import com.example.springmall.sample.vo.SampleRequest;
 
 @Mapper
 public interface SampleMapper {
@@ -12,7 +13,7 @@ public interface SampleMapper {
 	List<Sample> selectSampleAll(int startRow,int rowPerPage);
 	int selectCountSample();
 	// 2.insert
-	int insertSample(Sample sample);
+	int insertSample(SampleRequest sampleRequest);
 	// 3.delete
 	int deleteSample(int sampleNo);
 	// 4.update
