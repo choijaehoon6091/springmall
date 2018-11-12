@@ -14,55 +14,74 @@ import com.example.springmall.sample.vo.Sample;
 public class SampleService {
 	@Autowired
 	private SampleMapper sampleMapper;
+	
+	public int loginSample(Sample sample) {
+		int success = 0;
+		Sample getSample = new Sample();
+		getSample = (Sample) sampleMapper.loginSample(sample);
+		System.out.println(sample.getSampleId()+"<-넣은값");
+		System.out.println(getSample.getSampleId()+"<-결과");
+		System.out.println(sample.getSamplePw()+"넣은값");
+		System.out.println(getSample.getSamplePw()+"<-결과");
+		if(sample.getSampleId().equals(getSample.getSampleId()) && sample.getSamplePw().equals(getSample.getSamplePw())) {
+			System.out.println("01로그인성공");
+			success = 1;
+		}else {
+			System.out.println("02로그인실패");
+			success = 2;
+		}
+		return success;
+	}
+	
+	// 수정폼 
+	public Sample getSample(int sampleNo) {
+		System.out.println("SampleService.java.getSample()");
+		return sampleMapper.selectOne(sampleNo);
+	}
+	// 수정액션
+	public int modifySample(Sample sample) {
+		System.out.println("SampleService.java.modifySample()");
+		int success = sampleMapper.updateSample(sample);;
+		if(success == 1) {
+			System.out.println("삭제성공");
+		}else {
+			System.out.println("삭제실패");
+		}
+		return success;
+	}
+	// insert
+	public int addSample(Sample sample) {
+		System.out.println("SampleService.java.addSample()");
+		int success = sampleMapper.insertSample(sample);
+		if(success == 1) {
+			System.out.println("가입성공");
+		}else {
+			System.out.println("가입실패");
+		}
+		return success;
+	}
+	
 	int startRow = 0;
 	int rowPerPage = 10;
 	int totalCount;
 	// 1
 	public int getTotalCount() {
+		System.out.println("SampleService.java.getTotalCount()");
 		return totalCount = sampleMapper.selectCountSample();
 	}
 
 	public List<Sample> getSampleAll(int startRow){
-	
-	return sampleMapper.selectSampleAll(startRow,rowPerPage);
+		System.out.println("SampleService.java.getSampleAll()");
+		return sampleMapper.selectSampleAll(startRow,rowPerPage);
 	}
-	// 2
 	public int removeSample(int sampleNo) {
-		int deleteSuccess = sampleMapper.deleteSample(sampleNo);
-		if(deleteSuccess == 1) {
+		System.out.println("SampleService.java.removeSample()");
+		int success = sampleMapper.deleteSample(sampleNo);
+		if(success == 1) {
 			System.out.println("삭제성공");
 		}else {
 			System.out.println("삭제실패");
 		}
-		return deleteSuccess;
-	}		
-	// 3
-	public int addSample(Sample sample) {
-		System.out.println("SampleService.java.addSample()");
-        int insertSuccess = sampleMapper.insertSample(sample);
-        if(insertSuccess == 1) {
-            System.out.println("가입성공");
-        }else {
-            System.out.println("가입실패");
-        }
-        return insertSuccess;
-	    }
-
-	// 4
-	public Sample getSample(int sampleNo) {
-		 System.out.println("SampleService.java.getSample()");
-	     return sampleMapper.selectOne(sampleNo);
+		return success;
 	}
-	
-	// 5
-	public int modifySample(Sample sample) {
-        System.out.println("SampleService.java.modifySample()");
-        int modifySuccess = sampleMapper.updateSample(sample);;
-        if(modifySuccess == 1) {
-            System.out.println("수정성공");
-        }else {
-            System.out.println("수정실패");
-        }
-        return modifySuccess;
-	 }
 }

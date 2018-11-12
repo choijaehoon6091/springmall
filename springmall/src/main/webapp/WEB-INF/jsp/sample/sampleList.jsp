@@ -14,6 +14,24 @@
 	<table class="table table-dark">
 		<thead>
 			<tr>
+				<td colspan="3"></td>
+				<c:if test="${sId != null}">
+					<td>${sId} 님 로그인중..</td>
+					<td><a href="/sample/logoutSample"><button class="btn btn-primary">로그아웃</button></td> 
+				</c:if>
+				<c:if test="${sId == null}">
+					<td align="center"><a href="/sample/loginSample"><button class="btn btn-primary">로 그 인</button></td>
+					<td align="center"><a href="/sample/addSample"><button class="btn btn-primary">회 원 가 입</button></a></td>
+				</c:if>
+			</tr>
+			<tr class="info" align="center">
+				<td>no</td>
+				<td>id</td>
+				<td>pw</td>
+				<td>DELETE</td>
+				<td>UPDATE</td>
+			</tr>	
+			<tr>
 				<td> SAMPLE NO </td>
 				<td> SAMPLE ID </td>
 				<td> SAMPLE PW </td>
@@ -44,7 +62,8 @@
 					</c:if></td>
 				</tr>
 				<tr>
-              	  <td colspan="4"></td>
+              	  <td colspan="3"></td>
+                	<td><a href="/sample/loginSample"><button class="btn btn-primary">로 그 인</button></td>
                 	<td><a href="/sample/addSample"><button class="btn btn-success">샘플 추가</button></a></td>
            		 </tr>
 	</table>

@@ -19,4 +19,6 @@ public interface SampleMapper {
 	int updateSample(Sample sample);
 	// 5.select one
 	public abstract Sample selectOne(int sampleNo);
+	
+	public abstract Sample loginSample(Sample sample);
 }
